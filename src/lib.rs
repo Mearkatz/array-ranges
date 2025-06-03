@@ -39,11 +39,12 @@ macro_rules! range_inclusive {
         let mut arr = [0; $stop.abs_diff($start) as usize + 1];
         let mut current = $start;
         let mut i: usize = 0;
-        while current <= $stop {
+        while current < $stop {
             arr[i] = current;
             current += 1;
             i += 1;
         }
+        arr[i] = current;
         arr
     }};
 }
