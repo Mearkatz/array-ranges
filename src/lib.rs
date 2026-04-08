@@ -140,3 +140,20 @@ macro_rules! fn_min_to_max {
         }
     };
 }
+
+/// Applies a function to each element in an array, producing a new one.
+/// This is mainly for const functions, since arrays can be mapped at runtime.
+#[macro_export]
+macro_rules! map {
+    ($arr: expr, $func: expr, $len: expr) => {{
+        debug_assert!($arr.len() == $len);
+        const LEN: usize = $len;
+        let mut new_arr: [_; LEN] = unsafe { MaybeUninit::uninit().assume_init() };
+        let mut i = 0;
+        while i < LEN {
+            new_arr[i] = $func($arr[i]);
+            i += 1;
+        }
+        new_arr
+    }};
+}
