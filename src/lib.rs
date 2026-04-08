@@ -148,7 +148,7 @@ macro_rules! map {
     ($arr: expr, $func: expr, $len: expr) => {{
         debug_assert!($arr.len() == $len);
         const LEN: usize = $len;
-        let mut new_arr: [_; LEN] = unsafe { MaybeUninit::uninit().assume_init() };
+        let mut new_arr: [_; LEN] = unsafe { std::mem::MaybeUninit::uninit().assume_init() };
         let mut i = 0;
         while i < LEN {
             new_arr[i] = $func($arr[i]);

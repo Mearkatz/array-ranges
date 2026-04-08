@@ -1,5 +1,4 @@
 use array_ranges::*;
-use std::mem::MaybeUninit;
 
 const fn f(x: u8) -> i32 {
     (x as i32) * 2
